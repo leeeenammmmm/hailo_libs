@@ -43,7 +43,7 @@ re_id_sources = [
     're_id/re_id.cpp',
 ]
 
-shared_library('re_id',
+shared_library('re_id_nam',
     re_id_sources,
     cpp_args : hailo_lib_args,
     include_directories: [hailo_general_inc, hailo_mat_inc],

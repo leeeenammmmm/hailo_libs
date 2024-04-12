@@ -1,5 +1,40 @@
 install_subdir('post_processes_data', install_dir: post_proc_install_dir)
 
+
+################################################
+# PERSON ATTRIBUTES OVERLAY SOURCES
+################################################
+person_attributes_overlay_sources = [
+    'classification/person_attributes_overlay.cpp',
+]
+
+shared_library('person_attributes_overlay',
+    person_attributes_overlay_sources,
+    cpp_args : hailo_lib_args,
+    include_directories: [hailo_general_inc, include_directories('./')] + xtensor_inc + rapidjson_inc,
+    dependencies : post_deps + [opencv_dep, gst_dep, gst_base_dep, gstvideo_dep, gst_app_dep, tracker_dep],
+    gnu_symbol_visibility : 'default',
+    install: true,
+    install_dir: post_proc_install_dir,
+)
+
+################################################
+# PERSON RE-ID OVERLAY SOURCES
+################################################
+person_re_id_overlay_sources = [
+    're-id/re-id_overlay.cpp',
+]
+
+shared_library('re_id_overlay',
+    person_re_id_overlay_sources,
+    cpp_args : hailo_lib_args,
+    include_directories: [hailo_general_inc, include_directories('./')] + xtensor_inc + rapidjson_inc,
+    dependencies : post_deps + [opencv_dep, gst_dep, gst_base_dep, gstvideo_dep, gst_app_dep, tracker_dep],
+    gnu_symbol_visibility : 'default',
+    install: true,
+    install_dir: post_proc_install_dir,
+)
+
 ################################################
 # DETECTION SOURCES - MobilenetSSD
 ################################################
@@ -282,7 +317,7 @@ person_attributes_sources = [
     'classification/person_attributes.cpp',
 ]
 
-shared_library('person_attributes_post_custom',
+shared_library('person_attributes_post_custom_debug',
     person_attributes_sources,
     cpp_args : hailo_lib_args,
     include_directories: [hailo_general_inc, include_directories('./')] + xtensor_inc,
