@@ -36,6 +36,23 @@ shared_library('re_id_overlay',
 )
 
 ################################################
+# PERSON REID OVERLAY SOURCES
+################################################
+person_reid_overlay_sources = [
+    're-id/reid_overlay.cpp',
+]
+
+shared_library('reid_overlay',
+    person_reid_overlay_sources,
+    cpp_args : hailo_lib_args,
+    include_directories: [hailo_general_inc, include_directories('./')] + xtensor_inc + rapidjson_inc,
+    dependencies : post_deps + [opencv_dep, gst_dep, gst_base_dep, gstvideo_dep, gst_app_dep, tracker_dep],
+    gnu_symbol_visibility : 'default',
+    install: true,
+    install_dir: post_proc_install_dir,
+)
+
+################################################
 # DETECTION SOURCES - MobilenetSSD
 ################################################
 mobilenet_ssd_post_sources = [
