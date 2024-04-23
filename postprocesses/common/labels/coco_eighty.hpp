@@ -9,7 +9,7 @@ namespace common
     static std::map<uint8_t, std::string> coco_eighty = {
         {0, "unlabeled"},
         {1, "person"},
-        {2, "bicycle"},
+        {2, "face"},
         {3, "car"},
         {4, "motorcycle"},
         {5, "airplane"},

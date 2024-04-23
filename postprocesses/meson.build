@@ -1,5 +1,21 @@
 install_subdir('post_processes_data', install_dir: post_proc_install_dir)
 
+################################################
+# DETECTION SOURCES - YOLOV8
+################################################
+yolov8_source = [
+    'yolov8/yolov8_postprocess.cpp'
+]
+
+shared_library('yolov8_personface',
+    yolov8_source,
+    cpp_args : hailo_lib_args,
+    include_directories: [hailo_general_inc, include_directories('./')] + xtensor_inc,
+    dependencies : post_deps,
+    gnu_symbol_visibility : 'default',
+    install: true,
+    install_dir: post_proc_install_dir,
+)
 
 ################################################
 # PERSON ATTRIBUTES OVERLAY SOURCES
@@ -68,6 +84,7 @@ shared_library('mobilenet_ssd_post',
     install: true,
     install_dir: post_proc_install_dir,
 )
+
 
 ################################################
 # DETECTION SOURCES - YOLOV5M
