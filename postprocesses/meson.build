@@ -7,7 +7,7 @@ yolov8_source = [
     'yolov8/yolov8_postprocess.cpp'
 ]
 
-shared_library('yolov8_personface',
+shared_library('yolov8_fire_smoke_warning_90',
     yolov8_source,
     cpp_args : hailo_lib_args,
     include_directories: [hailo_general_inc, include_directories('./')] + xtensor_inc,
@@ -93,7 +93,7 @@ yolo_hailortpp_sources = [
     'detection/yolo_hailortpp.cpp'
 ]
 
-shared_library('yolo_hailortpp_post',
+shared_library('yolo_hailortpp_post_ROI',
     yolo_hailortpp_sources,
     cpp_args : hailo_lib_args,
     include_directories: [hailo_general_inc, include_directories('./')],
@@ -351,7 +351,7 @@ person_attributes_sources = [
     'classification/person_attributes.cpp',
 ]
 
-shared_library('person_attributes_post_custom_debug',
+shared_library('person_attributes_post_custom',
     person_attributes_sources,
     cpp_args : hailo_lib_args,
     include_directories: [hailo_general_inc, include_directories('./')] + xtensor_inc,

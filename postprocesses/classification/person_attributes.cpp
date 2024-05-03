@@ -131,7 +131,7 @@ void person_attributes_postprocess_47(HailoROIPtr roi, std::string output_layer_
                                                                    i,
                                                                    label,
                                                                    confidence);
-            std::cout << label << " " << confidence << std::endl;
+            // std::cout << label << " " << confidence << std::endl;
         }
 
         if (!classification)

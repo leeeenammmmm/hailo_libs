@@ -14,7 +14,7 @@
 #include "common/labels/coco_visdrone.hpp"
 
 static const int DEFAULT_MAX_BOXES = 100;
-static const float DEFAULT_THRESHOLD = 0.4;
+static const float DEFAULT_THRESHOLD = 0.5;
 
 class HailoNMSDecode
 {

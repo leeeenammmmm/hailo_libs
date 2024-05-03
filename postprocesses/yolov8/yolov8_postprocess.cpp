@@ -10,6 +10,8 @@
 #include <string>
 #include <tuple>
 #include <vector>
+#include <fstream>
+#include <ctime>
 
 // Hailo includes
 #include "common/math.hpp"
@@ -21,9 +23,40 @@
 
 using namespace xt::placeholders;
 
-#define SCORE_THRESHOLD 0.5
+#define SCORE_THRESHOLD 0.8
 #define IOU_THRESHOLD 0.7
 #define NUM_CLASSES 2
+
+const std::string file_name = "data.txt";
+std::time_t last_write_time = 0;
+std::string last_label = "";
+
+void write_txt(const std::string label) {
+    std::time_t now = std::time(nullptr);
+    if (label == last_label && std::difftime(now, last_write_time) < 5) {
+        return; 
+    }
+
+    std::tm* local_time = std::localtime(&now);
+    char buffer[80];
+    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", local_time);
+    
+    std::ifstream check_file(file_name);
+    if (!check_file.is_open()) {
+        std::ofstream create_file(file_name);
+        create_file.close();
+    }
+
+    std::ofstream file(file_name, std::ios::app);
+    if (file.is_open()){
+        file << label << " " << buffer <<std::endl;
+        file.close();
+
+        last_write_time = now;
+        last_label = label;
+    }
+
+}
 
 /**
  * @brief Split the raw output tensors into boxes and scores
@@ -175,6 +208,10 @@ std::vector<HailoDetection> decode_boxes(std::vector<HailoTensorPtr> raw_boxes_o
             label = common::coco_eighty[class_index + 1];
             HailoDetection detected_instance(bbox, class_index, label, confidence);
             detections.push_back(detected_instance);
+
+            //mo 1 file txt va in label vao file
+            if (label == "smoke" || label == "fire")
+                write_txt(label);
         }
     }
     return detections;
