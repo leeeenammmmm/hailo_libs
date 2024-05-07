@@ -16,4 +16,7 @@ void yolov8m(HailoROIPtr roi);
 void yolox(HailoROIPtr roi);
 void yolov5_no_persons(HailoROIPtr roi);
 void yolov5m_vehicles(HailoROIPtr roi);
+void yolov8s_personface_in_ROI(HailoROIPtr roi);
+void yolov8s_fire_smoke_warning(HailoROIPtr roi);
+
 __END_DECLS

@@ -93,7 +93,7 @@ yolo_hailortpp_sources = [
     'detection/yolo_hailortpp.cpp'
 ]
 
-shared_library('yolo_hailortpp_post_ROI',
+shared_library('yolo_hailortpp_custom_feature',
     yolo_hailortpp_sources,
     cpp_args : hailo_lib_args,
     include_directories: [hailo_general_inc, include_directories('./')],
