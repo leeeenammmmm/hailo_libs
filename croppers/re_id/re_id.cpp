@@ -13,7 +13,7 @@
 #define MAX_HEIGHT (0.8f)
 #define MIN_X (0.05f)
 #define MAX_X (0.95f)
-#define TRACK_DELAY (5)
+#define TRACK_DELAY (1)
 #define MIN_QUALITY (400)
 #define RE_ID_NETWORK_SIZE (cv::Size(128, 256))
 std::map<int, int> track_counter;
@@ -214,16 +214,23 @@ std::vector<HailoROIPtr> create_crops(std::shared_ptr<HailoMat> image, HailoROIP
             }
             else
             {
-                auto bbox = detection->get_bbox();
-                float quality = quality_estimation_nv12(image, bbox);
-                // float quality = 500;
-                float ratio = (bbox.height() * image->height()) / (bbox.width() * image->width());
-                if (ratio > MIN_RATIO && ratio < MAX_RATIO &&
-                    bbox.height() > MIN_HEIGHT && bbox.height() < MAX_HEIGHT &&
-                    bbox.xmin() > MIN_X && bbox.xmax() < MAX_X && quality > MIN_QUALITY)
-                {
-                    crop_rois.emplace_back(detection);
-                }
+                // auto bbox = detection->get_bbox();
+                // float quality = quality_estimation_nv12(image, bbox);
+                // // float quality = 500;
+                // float ratio = (bbox.height() * image->height()) / (bbox.width() * image->width());
+                // // if (ratio > MIN_RATIO && ratio < MAX_RATIO &&
+                // //     bbox.height() > MIN_HEIGHT && bbox.height() < MAX_HEIGHT &&
+                // //     bbox.xmin() > MIN_X && bbox.xmax() < MAX_X && quality > MIN_QUALITY)
+                // // {
+                // //     crop_rois.emplace_back(detection);
+                // // }
+                // if (ratio > MIN_RATIO && ratio < MAX_RATIO &&
+                //     bbox.height() > MIN_HEIGHT && bbox.height() < MAX_HEIGHT &&
+                //     bbox.xmin() > MIN_X && bbox.xmax() < MAX_X)
+                // {
+                //     crop_rois.emplace_back(detection);
+                // }
+                crop_rois.emplace_back(detection);
             }
         }
     }

@@ -4,6 +4,8 @@
 #include "common/labels/fire_smoke.hpp"
 #include "common/labels/person_face.hpp"
 
+#include "byte_track/ByteTrack-cpp/include/ByteTrack/BYTETracker.h"
+
 #include <fstream>
 #include <ctime>
 #include <iomanip>
@@ -156,6 +158,7 @@ void yolov8s_personface_in_ROI(HailoROIPtr roi)
     //[feature] detect stranger in ROI
     std::vector<HailoDetection> stranger_detections;
     read_txt(data_roi);
+    
     for(auto detection : detections){
         HailoBBox roi_bbox = hailo_common::create_flattened_bbox(roi->get_bbox(), roi->get_scaling_bbox());
         auto detection_bbox = detection.get_bbox();

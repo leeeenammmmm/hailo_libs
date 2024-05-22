@@ -90,13 +90,19 @@ shared_library('mobilenet_ssd_post',
 # DETECTION SOURCES - YOLOV5M
 ################################################
 yolo_hailortpp_sources = [
-    'detection/yolo_hailortpp.cpp'
+    'detection/yolo_hailortpp.cpp',
+    'byte_track/ByteTrack-cpp/src/BYTETracker.cpp',
+    'byte_track/ByteTrack-cpp/src/KalmanFilter.cpp',
+    'byte_track/ByteTrack-cpp/src/lapjv.cpp',
+    'byte_track/ByteTrack-cpp/src/Object.cpp',
+    'byte_track/ByteTrack-cpp/src/Rect.cpp',
+    'byte_track/ByteTrack-cpp/src/STrack.cpp'
 ]
 
 shared_library('yolo_hailortpp_custom_feature',
     yolo_hailortpp_sources,
     cpp_args : hailo_lib_args,
-    include_directories: [hailo_general_inc, include_directories('./')],
+    include_directories: [hailo_general_inc, eigen_inc, include_directories('./')],
     dependencies : post_deps,
     gnu_symbol_visibility : 'default',
     install: true,
@@ -355,7 +361,7 @@ shared_library('person_attributes_post_custom',
     person_attributes_sources,
     cpp_args : hailo_lib_args,
     include_directories: [hailo_general_inc, include_directories('./')] + xtensor_inc,
-    dependencies : post_deps + [tracker_dep],
+    dependencies : post_deps + [tracker_dep, libpqxx_dep],
     gnu_symbol_visibility : 'default',
     install: true,
     install_dir: post_proc_install_dir,

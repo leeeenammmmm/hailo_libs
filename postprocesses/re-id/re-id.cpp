@@ -54,6 +54,17 @@ void re_id_osnet(HailoROIPtr roi)
     auto normalized_embedding = common::vector_normalization(embedding);
 
     roi->add_object(hailo_common::create_matrix_ptr(normalized_embedding));
+
+    int check = 0;
+    for(auto o : roi->get_objects()){
+        if(o->get_type() == 6){
+            // std::cout << "This detection have matrix in filter \n";
+            check = 1;
+        }
+    }
+    if(check == 0){
+        std::cout << "This detection doesn't have matrix in filter \n";
+    }
 }
 
 void filter(HailoROIPtr roi)
